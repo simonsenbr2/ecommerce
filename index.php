@@ -2,17 +2,18 @@
 
 require_once("vendor/autoload.php");
 
-$app = new \Slim\Slim();
+use \Slim\Slim;
+use \Hcode\Page;
+
+$app = new Slim();  // o slim trabalha montando rotas
 
 $app->config('debug', true);
 
 $app->get('/', function() {
     
-	$sql = new Hcode\DB\Sql();
+	$page = new Page();   // ao criar ele ja chama a montagem do header
 
-    $result = $sql->select("SELECT * FROM tb_users");
-
-    echo json_encode($result);
+    $page->setTpl("index");  // aqui vem o meio da pagina  e ao Terminar ele chama automaticamente o destruct que monta o rodapé
 
 });
 
