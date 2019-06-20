@@ -13,21 +13,18 @@
              "data"=>[]
           ];
 
-      public function __construct($opts = array())
+      public function __construct($opts = array(), $tpl_dir = "/views/")
       {
 
           $this->options = array_merge($this->defaults, $opts);  // o merge mescla dois array, fazendo com que qdo tiverem index iguais fica valendo o do segundo parametro
           $config = array
           (
-              "tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/",
-              "cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."views-cache/",
-              "debug"         => false, // set to false to improve the speed
+              "tpl_dir"       => $_SERVER["DOCUMENT_ROOT"].$tpl_dir,
+              "cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
+              "debug"         => false // set to false to improve the speed
           );
 
           Tpl::configure( $config );
-
-          Tpl::registerPlugin( new Tpl\Plugin\PathReplace() );
-
 
           // create the Tpl object
           $this->tpl = new Tpl;
